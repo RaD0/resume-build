@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/liberation-serif" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        body *{
+            font-family: LiberationSerifRegular,serif !important;
+            line-height: 1 !important;
+        }
+        h1,h2,h3,h4,h5,h6 {
+            font-weight: normal !important;
+        }
+        h1 {
+            font-size: 2em !important;
+        }
+        h2 {
+            font-size: 1.5em !important;
+        }
+        h3 {
+            font-size: 1.25em !important;
+        }
+        h4 {
+            font-size: 1.15em !important;
+        }
+        .notop {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+        .nobtm {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        .ffu {
+            font-family: Ubuntu,serif !important;
+        }
+        .top4 {
+            margin-top: 4px;
+        }
+        .top8 {
+            margin-top: 8px;
+        }
+        .top2 {
+            margin-top: 2px;
+        }
+        .topbar {
+            height: 2px; background-color: black; text-align: left; width: 25px
+        }
+        .padleft {
+            padding-left: 8px;
+        }
+        ul p {
+            font-size: 1.1em !important;
+        }
+        hr {
+            border-top: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app" class="w3-container">
+    <div class="w3-container w3-center w3-margin-top">
+        <h1 class="nobtm"><b>{{ resume.name.first }} </b> {{ resume.name.last }}</h1>
+        <h2 class="notop ffu w3-margin-bottom">{{ resume.jobTitle }}</h2>
+    </div>
+
+    <div class="w3-container notop">
+        <h4 class="w3-col w3-center notop">
+            <span v-for="(contact, index) in resume.contacts">
+                {{ index > 0 ? '|' : '' }} {{ contact.item }}
+            </span>
+        </h4>
+    </div>
+
+    <hr class="notop"/>
+
+    <!--TECHNICAL SKILLS-->
+    <div class="w3-container">
+        <div class="topbar"></div>
+        <h2 class="top4 nobtm">Skills</h2>
+
+        <div v-for="skill in resume.skills">
+            <h3 class="top2 w3-margin-left nobtm">
+                {{ skill.title }}
+            </h3>
+            <p class="top2 w3-margin-left padleft">
+                {{ skill.items }}
+            </p>
+        </div>
+    </div>
+
+    <hr class="notop"/>
+
+    <!--Work Experience-->
+    <div class="w3-container">
+        <div class="topbar"></div>
+        <h2 class="top4 nobtm">Work Experience</h2>
+
+        <div v-for="work in resume.workExperience" class="w3-margin-left">
+            <h3 class="top2 nobtm">
+                {{ work.company }}
+                <p class="top2 w3-show-inline-block nobtm">
+                    &nbsp;|&nbsp;{{ work.period.from }} - {{ work.period.to }}
+                </p>
+            </h3>
+            <h4 class="notop nobtm">
+                <p class="top2 w3-show-inline-block nobtm">
+                    {{ work.title }}
+                </p>
+            </h4>
+                <div>
+                    <ul class="top8" style="padding-left: 16px">
+                        <li v-for="resp in work.responsibilities">
+                            <p class="top2 nobtm">
+                                {{ resp }}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+
+    <hr class="notop"/>
+
+    <!--EDUCATION-->
+    <div class="w3-container">
+        <div class="topbar"></div>
+        <h2 class="top4 nobtm">Education</h2>
+
+        <div v-for="ed in resume.education">
+            <h3 class="top2 w3-margin-left nobtm">
+                {{ ed.university }}
+            </h3>
+            <p class="top2 w3-margin-left">
+                {{ ed.degree }}
+            </p>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            resume: {
+                "name": {
+                    "first": "Richard",
+                    "last": "Stallman"
+                },
+                "jobTitle": "Software Activist",
+                "contacts": [
+                    {
+                        "title": "email",
+                        "item": "gnuisnotlinux@rms.com"
+                    },
+                    {
+                        "title": "linkedin",
+                        "item": "linkedin.com/rms"
+                    },
+                    {
+                        "title": "github",
+                        "item": "github.com/rms"
+                    }
+                ],
+                "skills": [
+                    {
+                        "title": "Languages/Frameworks & Concepts",
+                        "items": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    },
+                    {
+                        "title": "Databases & Reporting",
+                        "items": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    },
+                    {
+                        "title": "Build Tools & VCS",
+                        "items": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    },
+                    {
+                        "title": "OS & Servers",
+                        "items": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    }
+                ],
+                "workExperience": [
+                    {
+                        "company": "Fakebook, Bay Area",
+                        "period": {
+                            "from": "2017",
+                            "to": "Present"
+                        },
+                        "title": "Freelance Engineer",
+                        "responsibilities": [
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        ]
+                    },
+                    {
+                        "company": "Gourmet Chef, Ontario, Canada",
+                        "period": {
+                            "from": "2015",
+                            "to": "2017"
+                        },
+                        "title": "Software Development Engineer",
+                        "responsibilities": [
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        ]
+                    },
+                    {
+                        "company": "HighlyCorporate, Berlin, Germany",
+                        "period": {
+                            "from": "2013",
+                            "to": "2015"
+                        },
+                        "title": "Software Engineer",
+                        "responsibilities": [
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        ]
+                    }
+                ],
+                "education": [
+                    {
+                        "university": "GNU Institute of Information Technology",
+                        "degree": "PhD in Computer Science"
+                    },
+                    {
+                        "university": "One Institute of Information Technology",
+                        "degree": "Master of Science in Computer Science"
+                    },
+                    {
+                        "university": "The Other Technological University",
+                        "degree": "Bachelor of Technology - Computers Engineering"
+                    }
+                ]
+            }
+        }
+    })
+</script>
+</html>
